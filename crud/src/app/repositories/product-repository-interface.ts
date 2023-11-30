@@ -8,5 +8,5 @@ export interface IProductRepository {
     id: string,
     data: Partial<Omit<IProduct, '_id'>>
   ) => Promise<IProduct>
-  deleteById: (id: string) => Promise<void>
+  deleteById: (id: string) => Promise<IProduct>
 }

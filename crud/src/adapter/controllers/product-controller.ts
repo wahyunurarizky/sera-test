@@ -30,14 +30,13 @@ export default () => {
   const store = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const newProduct = await createProduct(repository, req.body)
-      res.json({ message: 'success', data: newProduct })
+      res.status(201).json({ message: 'success', data: newProduct })
     }
   )
 
   const update = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       const { id } = req.params
-
       const updatedProduct = await updateProductById(repository, id, req.body)
       res.json({ message: 'success', data: updatedProduct })
     }
@@ -47,8 +46,8 @@ export default () => {
     async (req: Request, res: Response, next: NextFunction) => {
       const { id } = req.params
 
-      await deleteProductById(repository, id)
-      res.json({ message: 'success', data: null })
+      const deletedProduct = await deleteProductById(repository, id)
+      res.status(204).json({ message: 'success', data: deletedProduct })
     }
   )
 

@@ -23,15 +23,19 @@ const itemRepository = (): IProductRepository => {
 
   const updateById = async (id: string, data: Partial<IProduct>) => {
     const updatedProduct = await Product.findByIdAndUpdate(id, data)
+    console.log(updatedProduct)
     if (updatedProduct) {
-      updatedProduct.toObject() as IProduct
+      return updatedProduct.toObject() as IProduct
     }
     throw new AppError('product not found with id: ' + id, 400)
   }
 
   const deleteById = async (id: string) => {
-    const deletedProduct = await Product.findByIdAndDelete(id)
-    console.log(deletedProduct)
+    const product = await Product.findByIdAndDelete(id)
+    if (product) {
+      return product as unknown as IProduct
+    }
+    throw new AppError('product not found with id: ' + id, 400)
   }
 
   return {

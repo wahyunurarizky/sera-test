@@ -31,5 +31,5 @@ export const deleteProductById = async (
   repository: IProductRepository,
   id: string
 ) => {
-  await repository.deleteById(id)
+  return await repository.deleteById(id)
 }
