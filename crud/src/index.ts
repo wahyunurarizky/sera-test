@@ -15,3 +15,5 @@ routes(app)
 
 // SERVER
 server(app)
+
+export default app

@@ -22,7 +22,9 @@ const itemRepository = (): IProductRepository => {
   }
 
   const updateById = async (id: string, data: Partial<IProduct>) => {
-    const updatedProduct = await Product.findByIdAndUpdate(id, data)
+    const updatedProduct = await Product.findByIdAndUpdate(id, data, {
+      new: true
+    })
     console.log(updatedProduct)
     if (updatedProduct) {
       return updatedProduct.toObject() as IProduct
